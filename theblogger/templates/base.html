@@ -42,21 +42,36 @@
           >
         </li>
 
+        {% if current_user.is_authenticated %}
+
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Log Out</a>
+          <a class="nav-link text-light" href="{{url_for('users.logout')}}"
+            >Log Out</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Account</a>
+          <a class="nav-link text-light" href="{{url_for('users.account')}}"
+            >Account</a
+          >
         </li>
         <li class="nav-item">
           <a class="nav-link text-light" href="#">Create Post</a>
         </li>
+
+        {% else %}
+
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Log In</a>
+          <a class="nav-link text-light" href="{{url_for('users.login')}}"
+            >Log In</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Register</a>
+          <a class="nav-link text-light" href="{{url_for('users.register')}}"
+            >Register</a
+          >
         </li>
+
+        {% endif %}
       </ul>
     </nav>
 

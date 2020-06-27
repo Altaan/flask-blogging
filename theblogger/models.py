@@ -14,6 +14,7 @@ class User(db.Model, UserMixin):  # Setting up the class responsible for creatin
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
+    # each user will have a default profile image
     profile_image = db.Column(
         db.String(64), nullable=False, default="default_profile.png")
     email = db.Column(db.String(64), unique=True, index=True)
@@ -35,7 +36,7 @@ class User(db.Model, UserMixin):  # Setting up the class responsible for creatin
         return check_password_hash(self.password_hash, password)
 
 
-class BlogPost(db.Model):
+class BlogPost(db.Model):  # this class is used to create post instances linked to the user
 
     users = db.relationship(User)
 

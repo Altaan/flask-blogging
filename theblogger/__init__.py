@@ -4,14 +4,11 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 
-from theblogger.core.views import core
-from theblogger.error_pages.handlers import error_pages
-
 ### App setup ###
 
 app = Flask(__name__)
-app.register_blueprint(core)
-app.register_blueprint(error_pages)
+
+app.config["SECRET_KEY"] = "mysecret"
 
 ### Database setup ###
 
@@ -30,3 +27,12 @@ login_manager = LoginManager()
 
 login_manager.init_app(app)
 login_manager.login_view = "users.login"
+
+### Blueprints registration ###
+from theblogger.core.views import core
+from theblogger.users.views import users
+from theblogger.error_pages.handlers import error_pages
+
+app.register_blueprint(core)
+app.register_blueprint(error_pages)
+app.register_blueprint(users)
